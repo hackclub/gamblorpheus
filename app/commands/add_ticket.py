@@ -46,7 +46,7 @@ async def add_ticket_handler(
         Ticket(lottery=lottery, order_id=int(order), user=user) for _ in range(quantity)
     ]
     tkts = await Ticket.insert(*tickets)
-    ids = [tkt["id"] for tkt in tkts]
+    ids = [str(tkt["id"]) for tkt in tkts]
 
     ref = "Ticket #:" + ",".join(ids)
     async with env.http.post(
