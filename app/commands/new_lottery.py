@@ -3,6 +3,7 @@ from slack_bolt.async_app import AsyncRespond
 from slack_sdk.web.async_client import AsyncWebClient
 
 from app.tables import Lottery
+from app.utils.logging import send_heartbeat
 
 
 async def new_lottery_handler(
@@ -22,4 +23,5 @@ async def new_lottery_handler(
     lottery = Lottery(name=name)
     await Lottery.insert(lottery)
 
+    await send_heartbeat(f"New lottery {name} created!")
     return await respond("Lottery created!")

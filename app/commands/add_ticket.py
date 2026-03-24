@@ -7,6 +7,7 @@ from app.env import env
 from app.tables import Lottery
 from app.tables import Ticket
 from app.tables import User
+from app.utils.logging import send_heartbeat
 
 
 async def add_ticket_handler(
@@ -55,4 +56,5 @@ async def add_ticket_handler(
         if fulfill_res.status != 200:
             return await respond("Something went wrong!")
 
+    await send_heartbeat(f"Issued {quantity} tickets to <@{slack_id}>.", messages=[ref])
     return await respond(f"Issued {quantity} tickets to <@{slack_id}>.")

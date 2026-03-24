@@ -1,55 +1,37 @@
 {
     "display_information": {
-        "name": "Template"
+        "name": "Gamblorpheus DEV"
     },
     "features": {
         "bot_user": {
-            "display_name": "Template",
+            "display_name": "Gamblorpheus DEV",
             "always_online": false
         },
-        "shortcuts": [
-            {
-                "name": "Hello World!",
-                "type": "global",
-                "callback_id": "hello_world",
-                "description": "Hi there"
-            }
-        ],
         "slash_commands": [
             {
-                "command": "/hello",
-                "description": "world!",
-                "should_escape": true
-            },
-            {
-                "command": "/dev-hello",
-                "description": "dev world",
-                "should_escape": true
+                "command": "/dev-lottery",
+                "url": "https://gamblorpheus.hackclub.com/slack/events",
+                "description": "Flavortown lottery!",
+                "should_escape": false
             }
         ]
     },
     "oauth_config": {
         "scopes": {
             "bot": [
-                "commands",
                 "chat:write",
-                "channels:history",
-                "groups:history"
+                "commands"
             ]
-        }
+        },
+        "pkce_enabled": false
     },
     "settings": {
-        "event_subscriptions": {
-            "bot_events": [
-                "message.channels",
-                "message.groups"
-            ]
-        },
         "interactivity": {
-            "is_enabled": true
+            "is_enabled": true,
+            "request_url": "https://gamblorpheus.hackclub.com/slack/events"
         },
         "org_deploy_enabled": false,
-        "socket_mode_enabled": true,
+        "socket_mode_enabled": false,
         "token_rotation_enabled": false
     }
 }

@@ -1,6 +1,12 @@
-# Slack Template
+# Gamblorpheus
 
-This is a Slack template for creating a great Slack app using Python and Starlette.
+Gamblorpheus is a Slack app that manages Flavortown's lottery! It's mainly for Amber's use but it exposes an API at https://gamblorpheus.hackclub.com/api/lotteries.
+
+Gamblorphues has the following Slack commands (whitelisted to Amber):
+- `/lottery new <name>` - This creates a new lottery
+- `/lottery add <order_id>` - This pulls the order from Flavortown and issues the user's lottery tickets
+- `/lottery draw` - Doesn't exist yet, but will soon. Will draw the winner of the lottery and issue their cookies!
+---
 
 ## Prerequisites
 
@@ -22,13 +28,11 @@ This is a Slack template for creating a great Slack app using Python and Starlet
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-repo/slack-template.git
-   cd slack-template
+   git clone https://github.com/hackclub/gamblorpheus.git
+   cd gamblorpheus
    ```
-   
-2. Rename the `app` folder to your app. You should also update this in `pyproject.toml`, `app/piccolo_app.py` and do a find and replace for `app.` to `foldername.`. 
 
-3. Install dependencies:
+2. Install dependencies:
 
    ```
    uv sync
@@ -38,13 +42,13 @@ This is a Slack template for creating a great Slack app using Python and Starlet
    source .venv/bin/activate.ps1 # for powershell
    ```
 
-4. Copy the `.env.sample` file to `.env`:
+3. Copy the `.env.sample` file to `.env`:
 
    ```
    cp .env.sample .env
    ```
 
-5. Edit the `.env` file and fill in the values.
+4. Edit the `.env` file and fill in the values.
 
 
 ## Running the Application
