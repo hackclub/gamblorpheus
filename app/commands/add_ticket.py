@@ -57,7 +57,8 @@ async def add_ticket_handler(
         if fulfill_res.status != 200:
             json = await fulfill_res.json()
             await send_heartbeat(
-                f"Something went wrong: {order}", messages=[f"```{json}```"]
+                f"Something went wrong processing #{order} - status {fulfill_res.status}",
+                messages=[f"```{json}```"],
             )
             return await respond("Something went wrong!")
 
