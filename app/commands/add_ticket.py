@@ -55,6 +55,10 @@ async def add_ticket_handler(
         data={"external_ref": ref, "fulfillment_cost": 0},
     ) as fulfill_res:
         if fulfill_res.status != 200:
+            json = await fulfill_res.json()
+            await send_heartbeat(
+                f"Something went wrong: {order}", messages=[f"```{json}```"]
+            )
             return await respond("Something went wrong!")
 
     await send_heartbeat(f"Issued {quantity} tickets to <@{slack_id}>.", messages=[ref])
