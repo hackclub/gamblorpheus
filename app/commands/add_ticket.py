@@ -50,7 +50,7 @@ async def add_ticket_handler(
 
     ref = "Ticket #:" + ",".join(ids)
     async with env.http.post(
-        "https://flavortown.hackclub.com/api/v1/admin/shop_orders/fulfill",
+        f"https://flavortown.hackclub.com/api/v1/admin/shop_orders/fulfill?order_id={order}",
         headers=headers,
         data={"external_ref": ref, "fulfillment_cost": 0},
     ) as fulfill_res:
