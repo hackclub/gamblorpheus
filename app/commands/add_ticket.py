@@ -33,6 +33,7 @@ async def add_ticket_handler(
         user_id = data.get("user_id")
 
     user = await User.objects().where(User.ft_id == user_id).first()
+    slack_id = ""
     if not user:
         async with env.http.get(
             f"https://flavortown.hackclub.com/api/v1/users/{user_id}", headers=headers
