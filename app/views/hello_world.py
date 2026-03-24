@@ -1,17 +1,16 @@
 from blockkit import Input
 from blockkit import Modal
 from blockkit import PlainTextInput
-from blockkit import Section
 from slack_bolt.async_app import AsyncAck
 from slack_sdk.web.async_client import AsyncWebClient
 
 
-async def get_hello_world_view(channel_id: str):
+async def get_add_ticket_view(channel_id: str):
     modal = (
         Modal()
         .callback_id("hello_world")
-        .title("Hewwo Wowld")
-        .add_block(Section("wrrf ^-^"))
+        .title("Add Ticket")
+        .add_block(Input().label("Order ID"))
         .add_block(
             Input("Say something ig")
             .block_id("input")

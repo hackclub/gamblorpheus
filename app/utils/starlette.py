@@ -8,6 +8,7 @@ from starlette.routing import Route
 
 from app.config import config
 from app.env import env
+from app.piccolo_migrations.app_2026_03_24t01_47_23_603476 import Lottery
 
 logger = logging.getLogger(__name__)
 
@@ -33,10 +34,16 @@ async def health(req: Request):
     )
 
 
+async def lotteries(req: Request):
+    lotteries_data = await Lottery.select()
+    return JSONResponse(lotteries_data)
+
+
 app = Starlette(
     debug=True if config.environment != "production" else False,
     routes=[
         Route(path="/slack/events", endpoint=endpoint, methods=["POST"]),
+        Route(path="/api/lotteries", endpoint=lotteries, methods=["GET"]),
         Route(path="/health", endpoint=health, methods=["GET"]),
     ],
     lifespan=env.enter,

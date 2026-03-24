@@ -10,23 +10,39 @@ from slack_bolt.async_app import AsyncRespond
 from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
 
-from app.commands.world import world_handler
+from app.commands.add_ticket import add_ticket_handler
+from app.commands.new_lottery import new_lottery_handler
 from app.config import config
 
-PREFIX = "hello"  # the main command!
+PREFIX = "lottery"  # the main command!
 
 COMMANDS = [
     {
-        "name": "world",
-        "description": "hello world!",
-        "function": world_handler,
+        "name": "add",
+        "description": "add a ticket to the lottery!",
+        "function": add_ticket_handler,
+        "admin": True,
         "parameters": [
             {
-                "name": "user",
+                "name": "order",
                 "type": "string",
-                "description": "anything!",
-                "default": ":3",
-            },
+                "description": "Flavortown order ID!",
+                "required": True,
+            }
+        ],
+    },
+    {
+        "name": "new",
+        "description": "start a new lottery!",
+        "function": new_lottery_handler,
+        "admin": True,
+        "parameters": [
+            {
+                "name": "name",
+                "type": "string",
+                "description": "Lottery name",
+                "required": True,
+            }
         ],
     },
 ]

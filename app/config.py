@@ -16,6 +16,7 @@ class Config(BaseSettings):
         env_file=".env", env_nested_delimiter="__", extra="ignore"
     )
     slack: SlackConfig
+    flavortown_api_key: str
     database_url: PostgresDsn
     environment: str = "development"
     timezone: str = "Europe/London"
