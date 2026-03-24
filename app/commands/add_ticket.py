@@ -52,7 +52,7 @@ async def add_ticket_handler(
     async with env.http.post(
         "https://flavortown.hackclub.com/api/v1/admin/shop_orders/fulfill",
         headers=headers,
-        body={"external_ref": ref, "fulfillment_cost": 0},
+        data={"external_ref": ref, "fulfillment_cost": 0},
     ) as fulfill_res:
         if fulfill_res.status != 200:
             return await respond("Something went wrong!")
