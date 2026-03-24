@@ -43,7 +43,7 @@ async def add_ticket_handler(
         await user.save()
 
     tickets = [
-        Ticket(lottery=lottery, order_id=order, user=user) for _ in range(quantity)
+        Ticket(lottery=lottery, order_id=int(order), user=user) for _ in range(quantity)
     ]
     tkts = await Ticket.insert(*tickets)
     ids = [tkt["id"] for tkt in tkts]
