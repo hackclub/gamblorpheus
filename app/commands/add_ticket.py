@@ -2,8 +2,6 @@ from slack_bolt.async_app import AsyncAck
 from slack_bolt.async_app import AsyncRespond
 from slack_sdk.web.async_client import AsyncWebClient
 
-from app.config import config
-from app.env import env
 from app.tables import Lottery
 from app.tables import Ticket
 from app.tables import User
@@ -18,6 +16,9 @@ async def add_ticket_handler(
     channel: str,
     order: str,
 ):
+    from app.config import config
+    from app.env import env
+
     await ack()
     lottery = await Lottery.objects().where(Lottery.open == True).first()  # noqa: E712
     if not lottery:
