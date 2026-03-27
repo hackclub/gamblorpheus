@@ -32,7 +32,7 @@ async def add_ticket_handler(
         quantity = data.get("quantity", 1)
         user_id = data.get("user_id")
         item_id = data.get("shop_item_id")
-        aasm_state = "aasm_state"
+        aasm_state = data.get("aasm_state")
         if item_id != 200:
             return await respond("That's not a lottery order!")
         if aasm_state != "awaiting_periodical_fulfillment":
