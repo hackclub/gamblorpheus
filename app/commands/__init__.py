@@ -11,6 +11,7 @@ from slack_sdk.errors import SlackApiError
 from slack_sdk.web.async_client import AsyncWebClient
 
 from app.commands.add_ticket import add_ticket_handler
+from app.commands.draw import draw_lottery_handler
 from app.commands.new_lottery import new_lottery_handler
 from app.config import config
 
@@ -44,6 +45,12 @@ COMMANDS = [
                 "required": True,
             }
         ],
+    },
+    {
+        "name": "draw",
+        "description": "draw the lottery!",
+        "function": draw_lottery_handler,
+        "admin": True,
     },
 ]
 
