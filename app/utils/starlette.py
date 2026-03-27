@@ -9,6 +9,7 @@ from starlette.routing import Route
 from app.config import config
 from app.env import env
 from app.piccolo_migrations.app_2026_03_24t01_47_23_603476 import Lottery
+from app.tables import Ticket
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +37,9 @@ async def health(req: Request):
 
 async def lotteries(req: Request):
     lotteries_data = await Lottery.select()
+    for lottery in lotteries_data:
+        tickets_data = await Ticket.select().where(Ticket.lottery == lottery["id"])
+        lottery["tickets"] = len(tickets_data)
     return JSONResponse(lotteries_data)
 
 
