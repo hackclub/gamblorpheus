@@ -6,6 +6,7 @@ from slack_sdk.web.async_client import AsyncWebClient
 
 from app.tables import Lottery
 from app.tables import Ticket
+from app.utils.logging import send_heartbeat
 
 
 async def draw_lottery_handler(
@@ -32,6 +33,13 @@ async def draw_lottery_handler(
 
     user = await winner.get_related(Ticket.user)
 
-    return await respond(
+    await respond(
         f"<@{user.slack_id}> won! They earnt 🍪 {len(tickets) * 10}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
+    )
+    await send_heartbeat(
+        f"<@{user.slack_id}> won! They earnt 🍪 {len(tickets) * 10}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
+    )
+
+    return await Lottery.update({Lottery.open: False, Lottery.winner: user.id}).where(
+        Lottery.open == True  # noqa: E712
     )
