@@ -39,7 +39,7 @@ async def lotteries(req: Request):
     lotteries_data = await Lottery.select()
     for lottery in lotteries_data:
         tickets_data = await Ticket.select().where(Ticket.lottery == lottery["id"])
-        lottery["tickets"] = tickets_data
+        lottery["tickets"] = str(tickets_data)
     return JSONResponse(lotteries_data)
 
 
