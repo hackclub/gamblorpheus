@@ -58,7 +58,7 @@ async def add_ticket_handler(
     ids = [str(tkt["id"]) for tkt in tkts]
 
     cookies = lottery.cookies + (9 * quantity)
-    await Lottery.update({Lottery.cookies: cookies})
+    await Lottery.update({Lottery.cookies: cookies}).where(Lottery.open == True)  # noqa: E712
 
     ref = "Ticket #:" + ",".join(ids)
     async with env.http.post(
