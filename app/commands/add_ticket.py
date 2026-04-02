@@ -57,6 +57,9 @@ async def add_ticket_handler(
     tkts = await Ticket.insert(*tickets)
     ids = [str(tkt["id"]) for tkt in tkts]
 
+    cookies = lottery.cookies + (9 * quantity)
+    await Lottery.update({Lottery.cookies: cookies})
+
     ref = "Ticket #:" + ",".join(ids)
     async with env.http.post(
         f"https://flavortown.hackclub.com/api/v1/admin/shop_orders/fulfill?order_id={order}",

@@ -28,16 +28,17 @@ async def draw_lottery_handler(
 
     lottery = lotteries[0]
     tickets = await Ticket.objects().where(Ticket.lottery == lottery["id"])
+    cookies = lottery.get("cookies", 0)
 
     winner: Ticket = random.choice(tickets)
 
     user = await winner.get_related(Ticket.user)
 
     await respond(
-        f"<@{user.slack_id}> won! They earnt 🍪 {len(tickets) * 10}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
+        f"<@{user.slack_id}> won! They earnt 🍪 {cookies}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
     )
     await send_heartbeat(
-        f"<@{user.slack_id}> won! They earnt 🍪 {len(tickets) * 10}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
+        f"<@{user.slack_id}> won! They earnt 🍪 {cookies}!\nhttps://flavortown.hackclub.com/admin/users/{user.ft_id}"
     )
 
     return await Lottery.update({Lottery.open: False, Lottery.winner: user.id}).where(
