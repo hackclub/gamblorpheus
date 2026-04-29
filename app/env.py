@@ -47,7 +47,9 @@ class Environment:
         # register_actions(env.app)
         # register_views(env.app)
         # register_events(env.app)
-        # register_tasks()
+        from app.tasks import register_tasks
+
+        register_tasks()
 
         logger.debug(f"Environment setup in {time() - st:.02}s")
         await send_heartbeat(
