@@ -19,7 +19,7 @@ def register_tasks():
     scheduler.add_job(
         auto_fulfill,
         "interval",
-        hours=1,
+        minutes=15,
         max_instances=1,
         next_run_time=datetime.now(),
     )
